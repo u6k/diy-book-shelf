@@ -8,7 +8,7 @@
     <groupId>me.u6k.diy_book_shelf</groupId>
     <artifactId>diy-book-shelf-server</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>diy-book-shelf-server</name>
     <url>https://myredmine-u6kapps.rhcloud.com/projects/diy-book-shelf</url>
 
