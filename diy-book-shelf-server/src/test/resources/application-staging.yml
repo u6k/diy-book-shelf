@@ -1,0 +1,17 @@
+server:
+    port: 8081
+
+spring:
+    datasource:
+        url: jdbc:mysql://localhost/diy_book_shelf_db
+        username: diy_book_shelf_user
+        password: diy_book_shelf_pass
+        driverClassName: com.mysql.jdbc.Driver
+    jpa:
+        hibernate:
+            ddl-auto: none
+            dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+    level:
+        org.springframework.web: DEBUG
