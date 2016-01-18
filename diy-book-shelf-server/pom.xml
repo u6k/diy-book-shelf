@@ -85,6 +85,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>me.u6k.diy_book_shelf.server.App</mainClass>
+                    <executable>true</executable>
                 </configuration>
             </plugin>
             <plugin>
