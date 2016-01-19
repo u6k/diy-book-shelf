@@ -21,10 +21,10 @@ public class Book implements Serializable {
 
     @Id
     @Column(name = "id")
-    private String id;
+    private UUID id;
 
     @Column(name = "book_id")
-    private String bookId;
+    private UUID bookId;
 
     @Column(name = "title")
     private String title;
@@ -36,7 +36,7 @@ public class Book implements Serializable {
     private String url;
 
     @Column(name = "timestamp")
-    private long timestamp;
+    private Date timestamp;
 
     @Column(name = "event")
     @Enumerated(EnumType.ORDINAL)
@@ -46,21 +46,21 @@ public class Book implements Serializable {
     }
 
     public Book(UUID id, UUID bookId, String title, String author, String url, Date timestamp, BookEvent event) {
-        this.id = (id != null ? id.toString() : null);
-        this.bookId = (bookId != null ? bookId.toString() : null);
+        this.id = id;
+        this.bookId = bookId;
         this.title = title;
         this.author = author;
         this.url = url;
-        this.timestamp = timestamp.getTime();
+        this.timestamp = timestamp;
         this.event = event;
     }
 
     public UUID getId() {
-        return (this.id != null ? UUID.fromString(this.id) : null);
+        return id;
     }
 
     public UUID getBookId() {
-        return (this.bookId != null ? UUID.fromString(this.bookId) : null);
+        return bookId;
     }
 
     public String getTitle() {
@@ -76,7 +76,7 @@ public class Book implements Serializable {
     }
 
     public Date getTimestamp() {
-        return new Date(this.timestamp);
+        return timestamp;
     }
 
     public BookEvent getEvent() {
