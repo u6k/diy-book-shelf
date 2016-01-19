@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: u6k
+      changes:
+        - createTable:
+            tableName: book
+            columns:
+              - column:
+                  name: id
+                  type: char(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: book_id
+                  type: char(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: author
+                  type: varchar(1000)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: original_url
+                  type: varchar(2000)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: timestamp
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event
+                  type: tinyint
+                  constraints:
+                    nullable: false

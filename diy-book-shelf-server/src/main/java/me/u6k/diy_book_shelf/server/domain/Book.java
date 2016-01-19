@@ -20,25 +20,25 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Book implements Serializable {
 
     @Id
-    @Column(name = "id", length = 36, nullable = false)
+    @Column(name = "id")
     private String id;
 
-    @Column(name = "book_id", length = 36, nullable = false)
+    @Column(name = "book_id")
     private String bookId;
 
-    @Column(name = "title", length = 1000, nullable = false)
+    @Column(name = "title")
     private String title;
 
-    @Column(name = "author", length = 1000, nullable = true)
+    @Column(name = "author")
     private String author;
 
-    @Column(name = "original_url", length = 2000, nullable = true)
+    @Column(name = "original_url")
     private String url;
 
-    @Column(name = "timestamp", nullable = false)
+    @Column(name = "timestamp")
     private long timestamp;
 
-    @Column(name = "event", nullable = false)
+    @Column(name = "event")
     @Enumerated(EnumType.ORDINAL)
     private BookEvent event;
 
