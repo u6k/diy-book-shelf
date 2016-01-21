@@ -52,51 +52,51 @@ public class BookRestControllerTest {
     @Test
     public void findAll() throws Exception {
         // 新規登録(最小限)
-        UUID bookId1 = UUID.randomUUID();
-        Book book = new Book(UUID.randomUUID(), bookId1, "テスト書籍1", null, null, new Date(), BookEvent.CREATE);
+        String bookId1 = UUID.randomUUID().toString();
+        Book book = new Book(UUID.randomUUID().toString(), bookId1, "テスト書籍1", null, null, new Date(), BookEvent.CREATE);
         _bookRepo.save(book);
 
         Thread.sleep(100);
 
         // 新規登録(全項目)
-        UUID bookId2 = UUID.randomUUID();
-        book = new Book(UUID.randomUUID(), bookId2, "テスト書籍2", "テスト　著者", "http://example.com/test2", new Date(), BookEvent.CREATE);
+        String bookId2 = UUID.randomUUID().toString();
+        book = new Book(UUID.randomUUID().toString(), bookId2, "テスト書籍2", "テスト　著者", "http://example.com/test2", new Date(), BookEvent.CREATE);
         _bookRepo.save(book);
 
         Thread.sleep(100);
 
         // 更新(最小限→全項目)
-        UUID bookId3 = UUID.randomUUID();
-        book = new Book(UUID.randomUUID(), bookId3, "テスト書籍3", null, null, new Date(), BookEvent.CREATE);
+        String bookId3 = UUID.randomUUID().toString();
+        book = new Book(UUID.randomUUID().toString(), bookId3, "テスト書籍3", null, null, new Date(), BookEvent.CREATE);
         _bookRepo.save(book);
 
         Thread.sleep(100);
 
-        book = new Book(UUID.randomUUID(), bookId3, "テスト書籍3-1", "テスト　著者", "http://example.com/test3", new Date(), BookEvent.UPDATE);
+        book = new Book(UUID.randomUUID().toString(), bookId3, "テスト書籍3-1", "テスト　著者", "http://example.com/test3", new Date(), BookEvent.UPDATE);
         _bookRepo.save(book);
 
         Thread.sleep(100);
 
         // 更新(全項目→最小限)
-        UUID bookId4 = UUID.randomUUID();
-        book = new Book(UUID.randomUUID(), bookId4, "テスト書籍4", "テスト　著者", "http://example.com/test4", new Date(), BookEvent.CREATE);
+        String bookId4 = UUID.randomUUID().toString();
+        book = new Book(UUID.randomUUID().toString(), bookId4, "テスト書籍4", "テスト　著者", "http://example.com/test4", new Date(), BookEvent.CREATE);
         _bookRepo.save(book);
 
         Thread.sleep(100);
 
-        book = new Book(UUID.randomUUID(), bookId4, "テスト書籍4-1", null, null, new Date(), BookEvent.UPDATE);
+        book = new Book(UUID.randomUUID().toString(), bookId4, "テスト書籍4-1", null, null, new Date(), BookEvent.UPDATE);
         _bookRepo.save(book);
 
         Thread.sleep(100);
 
         // 論理削除(新規登録→論理削除)
-        UUID bookId5 = UUID.randomUUID();
-        book = new Book(UUID.randomUUID(), bookId5, "テスト書籍5", null, null, new Date(), BookEvent.CREATE);
+        String bookId5 = UUID.randomUUID().toString();
+        book = new Book(UUID.randomUUID().toString(), bookId5, "テスト書籍5", null, null, new Date(), BookEvent.CREATE);
         _bookRepo.save(book);
 
         Thread.sleep(100);
 
-        book = new Book(UUID.randomUUID(), bookId5, book.getTitle(), null, null, new Date(), BookEvent.DELETE);
+        book = new Book(UUID.randomUUID().toString(), bookId5, book.getTitle(), null, null, new Date(), BookEvent.DELETE);
         _bookRepo.save(book);
 
         // 書籍を全検索して、結果を検証する。

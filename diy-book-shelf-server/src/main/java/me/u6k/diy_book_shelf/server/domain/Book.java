@@ -3,7 +3,6 @@ package me.u6k.diy_book_shelf.server.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,10 +20,10 @@ public class Book implements Serializable {
 
     @Id
     @Column(name = "id")
-    private UUID id;
+    private String id;
 
     @Column(name = "book_id")
-    private UUID bookId;
+    private String bookId;
 
     @Column(name = "title")
     private String title;
@@ -45,7 +44,7 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(UUID id, UUID bookId, String title, String author, String url, Date timestamp, BookEvent event) {
+    public Book(String id, String bookId, String title, String author, String url, Date timestamp, BookEvent event) {
         this.id = id;
         this.bookId = bookId;
         this.title = title;
@@ -55,11 +54,11 @@ public class Book implements Serializable {
         this.event = event;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public UUID getBookId() {
+    public String getBookId() {
         return bookId;
     }
 
