@@ -23,6 +23,11 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <resource.logging.file>${DBS_LOGGING_FILE}</resource.logging.file>
+        <resource.datasource.url>${DBS_DATASOURCE_URL}</resource.datasource.url>
+        <resource.datasource.username>${DBS_DATASOURCE_USERNAME}</resource.datasource.username>
+        <resource.datasource.password>${DBS_DATASOURCE_PASSWORD}</resource.datasource.password>
     </properties>
 
     <dependencies>
