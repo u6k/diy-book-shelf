@@ -148,13 +148,35 @@ public class BookRestControllerTest {
 
     @Test
     public void add() {
-        String title = "test"; // TODO 手頃なテストデータを確保する。
-        String req = String.format("{\"title\":\"%s\"}", title);
+        String title1 = "test-title-1"; // TODO 手頃なテストデータを確保する。
+        String req1 = String.format("{\"title\":\"%s\"}", title1);
+        String title2 = "test-title-2";
+        String req2 = String.format("{\"title\":\"%s\"}", title2);
+        String title3 = "test-title-3";
+        String req3 = String.format("{\"title\":\"%s\"}", title3);
 
         given() //
                 .contentType(ContentType.JSON) //
                 .config(getUTF8Config()) //
-                .body(req) //
+                .body(req1) //
+                .when() //
+                .post("/books") //
+                .then() //
+                .statusCode(HttpStatus.CREATED.value()) //
+                .body("book_id", is(not(nullValue())));
+        given() //
+                .contentType(ContentType.JSON) //
+                .config(getUTF8Config()) //
+                .body(req2) //
+                .when() //
+                .post("/books") //
+                .then() //
+                .statusCode(HttpStatus.CREATED.value()) //
+                .body("book_id", is(not(nullValue())));
+        given() //
+                .contentType(ContentType.JSON) //
+                .config(getUTF8Config()) //
+                .body(req3) //
                 .when() //
                 .post("/books") //
                 .then() //
@@ -162,14 +184,28 @@ public class BookRestControllerTest {
                 .body("book_id", is(not(nullValue())));
 
         List<Book> l = _s.findAll();
-        assertThat(l.size(), is(1));
+        assertThat(l.size(), is(3));
 
-        Book book = l.get(0);
-        assertThat(book.getBookId().length(), is(36));
-        assertThat(book.getTitle(), is("test"));
-        assertThat(book.getAuthor(), is(nullValue()));
-        assertThat(book.getUrl(), is(nullValue()));
-        assertThat(book.getTimestamp().getTime(), greaterThan(0L));
+        Book b = l.get(0);
+        assertThat(b.getBookId().length(), is(36));
+        assertThat(b.getTitle(), is("test-title-3"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
+
+        b = l.get(1);
+        assertThat(b.getBookId().length(), is(36));
+        assertThat(b.getTitle(), is("test-title-2"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
+
+        b = l.get(2);
+        assertThat(b.getBookId().length(), is(36));
+        assertThat(b.getTitle(), is("test-title-1"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
     }
 
     private RestAssuredConfig getUTF8Config() {
