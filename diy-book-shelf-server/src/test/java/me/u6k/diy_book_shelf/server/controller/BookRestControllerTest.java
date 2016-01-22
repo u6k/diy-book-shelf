@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -29,6 +30,7 @@ import me.u6k.diy_book_shelf.server.App;
 import me.u6k.diy_book_shelf.server.domain.Book;
 import me.u6k.diy_book_shelf.server.domain.BookEvent;
 import me.u6k.diy_book_shelf.server.domain.BookRepository;
+import me.u6k.diy_book_shelf.server.service.BookService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
@@ -38,6 +40,9 @@ public class BookRestControllerTest {
 
     @Autowired
     private BookRepository _bookRepo;
+
+    @Autowired
+    private BookService _s;
 
     @Value("${local.server.port:0}")
     private int _port;
@@ -139,6 +144,32 @@ public class BookRestControllerTest {
 
         assertThat(resp.getStatusCode(), is(HttpStatus.OK.value()));
         assertThat(resp.asString(), is("[]"));
+    }
+
+    @Test
+    public void add() {
+        String title = "test"; // TODO 手頃なテストデータを確保する。
+        String req = String.format("{\"title\":\"%s\"}", title);
+
+        given() //
+                .contentType(ContentType.JSON) //
+                .config(getUTF8Config()) //
+                .body(req) //
+                .when() //
+                .post("/books") //
+                .then() //
+                .statusCode(HttpStatus.CREATED.value()) //
+                .body("book_id", is(not(nullValue())));
+
+        List<Book> l = _s.findAll();
+        assertThat(l.size(), is(1));
+
+        Book book = l.get(0);
+        assertThat(book.getBookId().length(), is(36));
+        assertThat(book.getTitle(), is("test"));
+        assertThat(book.getAuthor(), is(nullValue()));
+        assertThat(book.getUrl(), is(nullValue()));
+        assertThat(book.getTimestamp().getTime(), greaterThan(0L));
     }
 
     private RestAssuredConfig getUTF8Config() {
