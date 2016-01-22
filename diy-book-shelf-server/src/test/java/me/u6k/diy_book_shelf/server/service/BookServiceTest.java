@@ -127,4 +127,20 @@ public class BookServiceTest {
         assertThat(l.size(), is(0));
     }
 
+    @Test
+    public void add() {
+        String title = "test"; // TODO 手頃なテストデータを確保する。
+
+        String bookId = _s.add(title, null, null);
+        assertThat(bookId.length(), is(36));
+
+        Book book = _s.findByBookId(bookId);
+
+        assertThat(book.getId().length(), is(36));
+        assertThat(book.getBookId().length(), is(36));
+        assertThat(book.getTitle(), is("test"));
+        assertThat(book.getAuthor(), is(nullValue()));
+        assertThat(book.getUrl(), is(nullValue()));
+    }
+
 }
