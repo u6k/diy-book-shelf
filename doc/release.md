@@ -29,13 +29,13 @@ mvn test package -Dspring.profiles.active=staging -Dspring.datasource.url=xxx -D
 
 ```
 mvn package -Dmaven.test.skip=true
-cp target/diy-book-shelf-server-*.*.*.jar ../../bin/
+cp target/diy-book-shelf-server-*.*.*.jar ../../bin/diy-book-shelf.jar
 ```
 
 ### リリース
 
 ```
-sudo ln -sf ../../bin/diy-book-shelf-server.*.*.*.jar /etc/init.d/diy-book-shelf-server
+sudo ln -sf ../../bin/diy-book-shelf-server.jar /etc/init.d/diy-book-shelf-server
 ```
 
 ### 実行手順

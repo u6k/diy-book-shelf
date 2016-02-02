@@ -2,7 +2,7 @@
 
 ## ディレクトリ、ファイル定義
 
-* `/mnt/data/opt/diy-book-shelf/bin/diy-book-shelf-server-*.*.*.jar`
+* `/mnt/data/opt/diy-book-shelf/bin/diy-book-shelf-server.jar`
     * アプリケーション実行ファイルの実体。
 * `/mnt/data/opt/diy-book-shelf/bin/diy-book-shelf-server.conf`
     * アプリケーション外部設定ファイル。サービス起動時に読み込まれる。環境変数を定義する。
@@ -71,7 +71,7 @@ flush privileges;
 ### サービス登録
 
 ```
-sudo ln -sf /mnt/data/opt/diy-book-shelf/bin/diy-book-shelf-server-*.*.*.jar /etc/init.d/diy-book-shelf-server
+sudo ln -sf /mnt/data/opt/diy-book-shelf/bin/diy-book-shelf-server.jar /etc/init.d/diy-book-shelf-server
 sudo chkconfig --add diy-book-shelf-server
 ```
 
