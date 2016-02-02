@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -29,6 +30,7 @@ import me.u6k.diy_book_shelf.server.App;
 import me.u6k.diy_book_shelf.server.domain.Book;
 import me.u6k.diy_book_shelf.server.domain.BookEvent;
 import me.u6k.diy_book_shelf.server.domain.BookRepository;
+import me.u6k.diy_book_shelf.server.service.BookService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
@@ -38,6 +40,9 @@ public class BookRestControllerTest {
 
     @Autowired
     private BookRepository _bookRepo;
+
+    @Autowired
+    private BookService _s;
 
     @Value("${local.server.port:0}")
     private int _port;
@@ -139,6 +144,68 @@ public class BookRestControllerTest {
 
         assertThat(resp.getStatusCode(), is(HttpStatus.OK.value()));
         assertThat(resp.asString(), is("[]"));
+    }
+
+    @Test
+    public void add() {
+        String title1 = "test-title-1"; // TODO 手頃なテストデータを確保する。
+        String req1 = String.format("{\"title\":\"%s\"}", title1);
+        String title2 = "test-title-2";
+        String req2 = String.format("{\"title\":\"%s\"}", title2);
+        String title3 = "test-title-3";
+        String req3 = String.format("{\"title\":\"%s\"}", title3);
+
+        given() //
+                .contentType(ContentType.JSON) //
+                .config(getUTF8Config()) //
+                .body(req1) //
+                .when() //
+                .post("/books") //
+                .then() //
+                .statusCode(HttpStatus.CREATED.value()) //
+                .body("book_id", is(not(nullValue())));
+        given() //
+                .contentType(ContentType.JSON) //
+                .config(getUTF8Config()) //
+                .body(req2) //
+                .when() //
+                .post("/books") //
+                .then() //
+                .statusCode(HttpStatus.CREATED.value()) //
+                .body("book_id", is(not(nullValue())));
+        given() //
+                .contentType(ContentType.JSON) //
+                .config(getUTF8Config()) //
+                .body(req3) //
+                .when() //
+                .post("/books") //
+                .then() //
+                .statusCode(HttpStatus.CREATED.value()) //
+                .body("book_id", is(not(nullValue())));
+
+        List<Book> l = _s.findAll();
+        assertThat(l.size(), is(3));
+
+        Book b = l.get(0);
+        assertThat(b.getBookId().length(), is(36));
+        assertThat(b.getTitle(), is("test-title-3"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
+
+        b = l.get(1);
+        assertThat(b.getBookId().length(), is(36));
+        assertThat(b.getTitle(), is("test-title-2"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
+
+        b = l.get(2);
+        assertThat(b.getBookId().length(), is(36));
+        assertThat(b.getTitle(), is("test-title-1"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
     }
 
     private RestAssuredConfig getUTF8Config() {

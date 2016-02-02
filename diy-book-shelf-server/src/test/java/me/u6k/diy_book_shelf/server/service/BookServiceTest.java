@@ -127,4 +127,46 @@ public class BookServiceTest {
         assertThat(l.size(), is(0));
     }
 
+    @Test
+    public void add() {
+        String title1 = "test-title-1"; // TODO 手頃なテストデータを確保する。
+        String bookId1 = _s.add(title1, null, null);
+        assertThat(bookId1.length(), is(36));
+
+        String title2 = "test-title-2";
+        String bookId2 = _s.add(title2, null, null);
+        assertThat(bookId2.length(), is(36));
+
+        String title3 = "test-title-3";
+        String bookId3 = _s.add(title3, null, null);
+        assertThat(bookId3.length(), is(36));
+
+        assertThat(bookId1, is(not(equalTo(bookId2))));
+        assertThat(bookId2, is(not(equalTo(bookId3))));
+
+        List<Book> l = _s.findAll();
+        assertThat(l.size(), is(3));
+
+        Book b = l.get(0);
+        assertThat(b.getBookId(), is(bookId3));
+        assertThat(b.getTitle(), is("test-title-3"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
+
+        b = l.get(1);
+        assertThat(b.getBookId(), is(bookId2));
+        assertThat(b.getTitle(), is("test-title-2"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
+
+        b = l.get(2);
+        assertThat(b.getBookId(), is(bookId1));
+        assertThat(b.getTitle(), is("test-title-1"));
+        assertThat(b.getAuthor(), is(nullValue()));
+        assertThat(b.getUrl(), is(nullValue()));
+        assertThat(b.getTimestamp().getTime(), greaterThan(0L));
+    }
+
 }

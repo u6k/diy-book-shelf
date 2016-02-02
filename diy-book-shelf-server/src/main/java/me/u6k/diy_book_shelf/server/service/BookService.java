@@ -3,6 +3,8 @@ package me.u6k.diy_book_shelf.server.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,11 @@ public class BookService {
     @Autowired
     private BookRepository _repo;
 
+    @Transactional
+    public String add(String title, String author, String originalUrl) {
+        throw new UnsupportedOperationException();
+    }
+
     public List<Book> findAll() {
         L.debug("#findAll");
 
@@ -26,6 +33,10 @@ public class BookService {
 
         L.debug("return: " + l);
         return l;
+    }
+
+    public Book findByBookId(String bookId) {
+        throw new UnsupportedOperationException();
     }
 
 }
