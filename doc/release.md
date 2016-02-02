@@ -21,6 +21,8 @@ cd diy-book-shelf-server/
 mvn test package -Dspring.profiles.active=staging -Dspring.datasource.url=xxx -Dspring.datasource.username=xxx -Dspring.datasource.password=xxx
 ```
 
+テストの内容によっては、DBの全テーブルをDROPしてから行うこと。DBの再作成でも良い。
+
 ### ビルド
 
 ビルドを実行する。
