@@ -18,7 +18,7 @@ cd diy-book-shelf-server/
 テストを実行する。`-Dspring.datasource.url`、`-Dspring.datasource.username`、`-Dspring.datasource.password`には、ステージング環境の値を設定する。
 
 ```
-mvn test package -Dspring.profiles.active=staging -Dspring.datasource.url=xxx -Dspring.datasource.username=xxx -Dspring.datasource.password=xxx
+mvn test -Dspring.profiles.active=staging -Dspring.datasource.url=xxx -Dspring.datasource.username=xxx -Dspring.datasource.password=xxx
 ```
 
 テストの内容によっては、DBの全テーブルをDROPしてから行うこと。DBの再作成でも良い。
