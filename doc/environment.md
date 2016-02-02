@@ -78,6 +78,6 @@ sudo chkconfig --add diy-book-shelf-server
 設定ファイルをコピーして、内容を変更する。
 
 ```
-cp /mnt/data/opt/diy-book-shelf/git/diy-book-shelf-server/src/release/conf/diy-book-shelf-server.conf /mnt/data/opt/diy-book-shelf/bin/
+cp /mnt/data/opt/diy-book-shelf/git/diy-book-shelf-server/src/main/release/conf/diy-book-shelf-server.conf /mnt/data/opt/diy-book-shelf/bin/
 vim /mnt/data/opt/diy-book-shelf/bin/diy-book-shelf-server.conf
 ```
