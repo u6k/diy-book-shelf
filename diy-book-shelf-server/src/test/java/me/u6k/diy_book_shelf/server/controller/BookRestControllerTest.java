@@ -33,7 +33,7 @@ import me.u6k.diy_book_shelf.server.domain.BookRepository;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = App.class)
 @WebAppConfiguration
-@IntegrationTest({ "server.post:0" })
+@IntegrationTest({ "server.port:0" })
 public class BookRestControllerTest {
 
     @Autowired
